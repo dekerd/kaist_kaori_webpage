@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+ 
+   <head>
+      <meta charset="UTF-8">
+      <title>React App</title>
+      <!-- React JS -->
+	  <script src="https://fb.me/react-15.1.0.js"></script>
+	  <script src="https://fb.me/react-dom-15.1.0.js"></script>
+
+	  <!-- Firebase -->
+	  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+
+	  <!-- ReactFire -->
+	  <script src="https://cdn.firebase.com/libs/reactfire/1.0.0/reactfire.min.js"></script>
+   </head>
+ 
+   <body>
+	<script type="text/babel" src="src/components/App.js"></script>
+	<div id="root"></div>
+
+    <script src="/bundle.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyB0bs2I8kn2EdjEfenV7K2e5UykNIvCrI8",
+	    authDomain: "project-4245397982748320813.firebaseapp.com",
+	    databaseURL: "https://project-4245397982748320813.firebaseio.com",
+	    storageBucket: "project-4245397982748320813.appspot.com",
+	  };
+	  firebase.initializeApp(config);
+	 var ref = firebase.database().ref();
+	  </script>
+
+	  <script>
+	  ref.once('value').then(function(snapshot) {
+	      var data = snapshot.val();
+	      data.sort(function(a,b){return Intl.Collator("pl").compare(a.year,b.year)})
+	      data.sort(function(a,b){return Intl.Collator("pl").compare(a.name,b.name)})
+	      for(i = 0; i < data.length; i++){
+
+	      	if(data[i].medal == "금상" && data[i].officiality == "공식"){
+		      document.write(data[i].name + " ");
+		      document.write(data[i].event + " ");
+		      document.write(data[i].distance + " ");
+		      document.write(data[i].record + " ");
+		      document.write(data[i].year + " ");
+		      document.write(data[i].compname + " <br>");
+		  	}
+		  }
+	   });
+	  </script>
+    
+      
+   </body>
+ 
+</html>
